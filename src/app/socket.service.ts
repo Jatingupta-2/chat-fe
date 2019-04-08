@@ -11,7 +11,7 @@ import{HttpHeaders,HttpErrorResponse,HttpParams,HttpClient} from '@angular/commo
   providedIn: 'root'
 })
 export class SocketService {
-  private url='https://chatapi.edwisor.com';
+  private url='http://localhost:3000';
   private socket;
 
   constructor(private http:HttpClient) {
@@ -68,6 +68,7 @@ export class SocketService {
      this.socket.emit('chat-msg',chatMsgObj);
    }
    public exitSocket=()=>{
+     console.log("Exiting Socket")
      this.socket.disconnect();
    }
 

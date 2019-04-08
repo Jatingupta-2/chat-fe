@@ -20,7 +20,7 @@ export class FirstCharComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this._name=name;
+    this._name=this.name;
     this.firstChar=this._name[0];
   }
 

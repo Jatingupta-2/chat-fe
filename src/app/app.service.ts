@@ -11,7 +11,7 @@ import{HttpClient,HttpHeaders,HttpErrorResponse,HttpParams} from '@angular/commo
   providedIn: 'root'
 })
 export class AppService {
-private url="https://chatapi.edwisor.com";
+private url="http://localhost:3000";
   constructor(private http:HttpClient) { }
 
   public signup=(data):Observable<any>=>{

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-import * as $ from 'jquery';
+
 import { AppService } from '../../app.service';
 import { SocketService } from '../../socket.service';
 import { ToastrService } from 'ngx-toastr';
@@ -36,17 +36,18 @@ export class ChatboxComponent implements OnInit {
   constructor(private apps: AppService, private socket: SocketService,
     private toastr: ToastrService, public router: Router) {
     this.receiverId = Cookie.get('receiverId');
-    this.receiverName = Cookie.get('receiverName');
+    
   }
 
   ngOnInit() {
     this.authToken = Cookie.get('authToken');
     this.receiverId = Cookie.get('receiverId');
-    this.receiverName = Cookie.get('receiverName');
+    
     this.userInfo = this.apps.getUserInfo();
+    
     console.log(this.authToken, this.receiverId, this.receiverName);
     if (this.receiverId != null || this.receiverId != undefined || this.receiverId != '') {
-      this.userSelectedToChat(this.receiverId, this.receiverName);
+      
     }
     this.checkStatus();
     this.verifyUserConfirmation();
@@ -64,6 +65,7 @@ export class ChatboxComponent implements OnInit {
 
   public checkStatus: any = () => {
     if (Cookie.get('authToken') == undefined || Cookie.get('authToken') == '' || Cookie.get('authToken') == null) {
+      console.log("checking status")
       this.router.navigate(['/']);
       return false;
     }
@@ -103,7 +105,7 @@ export class ChatboxComponent implements OnInit {
   public getPreviousChatWithAUser: any = () => {
 
     let previousData = (this.messageList.length > 0 ? this.messageList.slice() : '')
-    console.log(this.userInfo.userId, this.receiverId, this.pageValue * 10);
+    console.log(this.userInfo, this.receiverId, this.pageValue * 10);
     this.socket.getChat(this.userInfo.userId, this.receiverId, this.pageValue * 10)
       .subscribe((apiResponse) => {
         console.log(apiResponse);
@@ -123,6 +125,7 @@ export class ChatboxComponent implements OnInit {
   }
 
   public loadEarlierPageOfChat:any=()=>{
+    console.log("Loading Previous Chat")
     this.loadingPreviousChat=true;
     this.pageValue++;
     this.scrollToChatTop=true;
@@ -189,6 +192,7 @@ export class ChatboxComponent implements OnInit {
     else{
       
       this.toastr.warning("Text is empty");
+      this.messageText="";
     }
   }
 
@@ -230,4 +234,23 @@ export class ChatboxComponent implements OnInit {
   }
   )
   }
+
+
+  showUserName =(name:string)=>{
+
+    this.toastr.success("You are chatting with "+name)
+
+  }
+
+
+
+
+
+
+
+
+
+    
+
+
 }

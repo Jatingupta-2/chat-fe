@@ -43,7 +43,7 @@
 
     </div> -->
 
-    <div class="col-12 displayNoneMobile col-sm-4 col-md-4 people-list p-0" id="people-list">
+    <div class="col-12 displayNoneMobile col-sm-4 col-md-4 col-lg-8 people-list p-0" id="people-list">
 
       <div class="p-3 text-white textCapitalize textCenter">
           {{userInfo.firstName}} {{userInfo.lastName}}
@@ -69,7 +69,7 @@
 
     </div>
 
-    <div class="col-12 col-sm-8 col-md-8 chat">
+    <div class="col-12 displayNoneMobile col-sm-8 col-lg-8 col-md-8 chat">
       <div class="chat-header clearfix mobileMenu" *ngIf="receiverName">
         <first-char [name]="receiverName" [userBg]="'blue'" [userColor]="'white'" (notify)="showUserName($event)"></first-char>
 
@@ -82,13 +82,13 @@
       <div #scrollMe [scrollTop]="(scrollToChatTop)?'0':scrollMe.scrollHeight" class="chat-history" *ngIf="receiverName">
 
         <ul>
-          <div class="textCenter" *ngIf="receiverName">
+          <div class="textCenter" >
 
             <span  class="cursorPointer" (click)="loadEarlierPageOfChat()">Load Previous Chat</span>
 
             <br>
 
-            <span *ngIf="loadingPreviousChat == true">Loading...</span>
+            <div *ngIf="loadingPreviousChat==true">Loading...</div>
 
           </div>
           <div class="clearfix" *ngFor="let message of messageList">

@@ -42,9 +42,7 @@
       else if (!this.password) {
         this.toastr.warning('Please Enter password');
       }
-      else if (!this.apiKey) {
-        this.toastr.warning('Please Enter apiKey');
-      }
+      
       else {
         let data = {
           firstName: this.firstName,
@@ -52,7 +50,7 @@
           mobile: this.mobile,
           email: this.email,
           password: this.password,
-          apiKey: this.apiKey
+          
 
         }
         this.apps.signup(data).subscribe(
